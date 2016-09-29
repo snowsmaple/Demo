@@ -1,21 +1,9 @@
 package com.test;
 
+import org.joda.time.*;
+
 import java.text.ParseException;
 import java.util.Date;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.DateTimeZone;
-import org.joda.time.Days;
-import org.joda.time.Duration;
-import org.joda.time.Hours;
-import org.joda.time.Interval;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-import org.joda.time.Minutes;
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
-import org.joda.time.Seconds;
 
 public class JodaTest {
 
@@ -33,195 +21,195 @@ public class JodaTest {
 		t.test10();
 		t.test11();
 	}
-	
-	
-	// ¼ÆËãÊ±¼ä²î
+
+
+	// è®¡ç®—æ—¶é—´å·®
 	public void test1() throws ParseException {
 		DateTime dt1 = new DateTime(2016, 2, 14, 13, 1, 0, 0);
 		DateTime dt2 = new DateTime(2016, 2, 15, 16, 0, 0, 0);
-		System.out.print("Ê±¼äÏà²î£º");
-		System.out.print(Days.daysBetween(dt1, dt2).getDays() + " Ìì ");
-		System.out.print(Hours.hoursBetween(dt1, dt2).getHours() % 24 + " Ğ¡Ê± ");
+		System.out.print("æ—¶é—´ç›¸å·®ï¼š");
+		System.out.print(Days.daysBetween(dt1, dt2).getDays() + " å¤© ");
+		System.out.print(Hours.hoursBetween(dt1, dt2).getHours() % 24 + " å°æ—¶ ");
 		System.out.print(Minutes.minutesBetween(dt1, dt2).getMinutes() % 60
-				+ " ·ÖÖÓ ");
+				+ " åˆ†é’Ÿ ");
 		System.out.print(Seconds.secondsBetween(dt1, dt2).getSeconds() % 60
-				+ " Ãë.");
+				+ " ç§’.");
 		System.out.println();
 	}
 
-	
-	// Interval¼ÆËãÊ±¼ä²îÖµ
+
+	// Intervalè®¡ç®—æ—¶é—´å·®å€¼
 	public void test2() {
 		DateTime dt1 = new DateTime(2016, 2, 14, 13, 1, 0, 0);
 		DateTime dt2 = new DateTime(2016, 2, 15, 16, 0, 0, 0);
 		Interval interval = new Interval(dt1.getMillis(), dt2.getMillis());
 		Period p = interval.toPeriod();
 		System.out.println(p.toString());
-		System.out.println("Ê±¼äÏà²î£º" + p.getDays() + " Ìì " + p.getHours()
-				+ " Ğ¡Ê± " + p.getMinutes() + " ·ÖÖÓ" + p.getSeconds() + " Ãë");
+		System.out.println("æ—¶é—´ç›¸å·®ï¼š" + p.getDays() + " å¤© " + p.getHours()
+				+ " å°æ—¶ " + p.getMinutes() + " åˆ†é’Ÿ" + p.getSeconds() + " ç§’");
 	}
 
-	
-	// ÈÕÆÚÇ°ºóÍÆËã
+
+	// æ—¥æœŸå‰åæ¨ç®—
 	public void test3() {
 		DateTime dt = new DateTime();
-		// ×òÌì
+		// æ˜¨å¤©
 		DateTime yesterday = dt.minusDays(1);
-		// Ã÷Ìì
+		// æ˜å¤©
 		DateTime tomorrow = dt.plusDays(1);
-		// 1¸öÔÂÇ°
+		// 1ä¸ªæœˆå‰
 		DateTime before1month = dt.minusMonths(1);
-		// 3¸öÔÂºó
+		// 3ä¸ªæœˆå
 		DateTime after3month = dt.plusMonths(3);
-		// 2ÄêÇ°
+		// 2å¹´å‰
 		DateTime before2year = dt.minusYears(2);
-		// 5Äêºó
+		// 5å¹´å
 		DateTime after5year = dt.plusYears(5);
 	}
 
-	
-	// ¹¹Ôìº¯Êı
+
+	// æ„é€ å‡½æ•°
 	public void test4() {
-		// ·½·¨Ò»£ºÈ¡ÏµÍ³µã¼ä
+		// æ–¹æ³•ä¸€ï¼šå–ç³»ç»Ÿç‚¹é—´
 		DateTime dt1 = new DateTime();
 
-		// ·½·¨¶ş£ºÍ¨¹ıjava.util.Date¶ÔÏóÉú³É
+		// æ–¹æ³•äºŒï¼šé€šè¿‡java.util.Dateå¯¹è±¡ç”Ÿæˆ
 		DateTime dt2 = new DateTime(new Date());
 
-		// ·½·¨Èı£ºÖ¸¶¨ÄêÔÂÈÕµã·ÖÃëÉú³É(²ÎÊıÒÀ´ÎÊÇ£ºÄê,ÔÂ,ÈÕ,Ê±,·Ö,Ãë,ºÁÃë)
+		// æ–¹æ³•ä¸‰ï¼šæŒ‡å®šå¹´æœˆæ—¥ç‚¹åˆ†ç§’ç”Ÿæˆ(å‚æ•°ä¾æ¬¡æ˜¯ï¼šå¹´,æœˆ,æ—¥,æ—¶,åˆ†,ç§’,æ¯«ç§’)
 		DateTime dt3 = new DateTime(2012, 5, 20, 13, 14, 0, 0);
 
-		// ·½·¨ËÄ£ºISO8601ĞÎÊ½Éú³É
+		// æ–¹æ³•å››ï¼šISO8601å½¢å¼ç”Ÿæˆ
 		DateTime dt4 = new DateTime("2012-05-20");
 		DateTime dt5 = new DateTime("2012-05-20T13:14:00");
 
-		// Ö»ĞèÒªÄêÔÂÈÕµÄÊ±ºò
+		// åªéœ€è¦å¹´æœˆæ—¥çš„æ—¶å€™
 		LocalDate localDate = new LocalDate(2016, 9, 6);// September 6, 2009
 
-		// Ö»ĞèÒªÊ±·ÖÃëºÁÃëµÄÊ±ºò
+		// åªéœ€è¦æ—¶åˆ†ç§’æ¯«ç§’çš„æ—¶å€™
 		LocalTime localTime = new LocalTime(13, 30, 26, 0);// 1:30:26PM
-		
+
 		System.out.println(localTime.toString());
 		System.out.println(localTime.toDateTimeToday());
 	}
 
-	
-	// »ñÈ¡ÄêÔÂÈÕĞÇÆÚ£¬µã·ÖÃë£¬ºÁÃë
+
+	// è·å–å¹´æœˆæ—¥æ˜ŸæœŸï¼Œç‚¹åˆ†ç§’ï¼Œæ¯«ç§’
 	public void test5() {
 		DateTime dt = new DateTime();
-		// Äê
+		// å¹´
 		int year = dt.getYear();
-		// ÔÂ
+		// æœˆ
 		int month = dt.getMonthOfYear();
-		// ÈÕ
+		// æ—¥
 		int day = dt.getDayOfMonth();
-		// ĞÇÆÚ
+		// æ˜ŸæœŸ
 		int week = dt.getDayOfWeek();
-		// µã
+		// ç‚¹
 		int hour = dt.getHourOfDay();
-		// ·Ö
+		// åˆ†
 		int min = dt.getMinuteOfHour();
-		// Ãë
+		// ç§’
 		int sec = dt.getSecondOfMinute();
-		// ºÁÃë
+		// æ¯«ç§’
 		int msec = dt.getMillisOfSecond();
 
 	}
 
-	
-	// ĞÇÆÚµÄÌØÊâ´¦Àí
+
+	// æ˜ŸæœŸçš„ç‰¹æ®Šå¤„ç†
 	public void test6() {
 		DateTime dt = new DateTime();
 
-		// ĞÇÆÚ
+		// æ˜ŸæœŸ
 		switch (dt.getDayOfWeek()) {
-		case DateTimeConstants.SUNDAY:
-			System.out.println("ĞÇÆÚÈÕ");
-			break;
-		case DateTimeConstants.MONDAY:
-			System.out.println("ĞÇÆÚÒ»");
-			break;
-		case DateTimeConstants.TUESDAY:
-			System.out.println("ĞÇÆÚ¶ş");
-			break;
-		case DateTimeConstants.WEDNESDAY:
-			System.out.println("ĞÇÆÚÈı");
-			break;
-		case DateTimeConstants.THURSDAY:
-			System.out.println("ĞÇÆÚËÄ");
-			break;
-		case DateTimeConstants.FRIDAY:
-			System.out.println("ĞÇÆÚÎå");
-			break;
-		case DateTimeConstants.SATURDAY:
-			System.out.println("ĞÇÆÚÁù");
-			break;
+			case DateTimeConstants.SUNDAY:
+				System.out.println("æ˜ŸæœŸæ—¥");
+				break;
+			case DateTimeConstants.MONDAY:
+				System.out.println("æ˜ŸæœŸä¸€");
+				break;
+			case DateTimeConstants.TUESDAY:
+				System.out.println("æ˜ŸæœŸäºŒ");
+				break;
+			case DateTimeConstants.WEDNESDAY:
+				System.out.println("æ˜ŸæœŸä¸‰");
+				break;
+			case DateTimeConstants.THURSDAY:
+				System.out.println("æ˜ŸæœŸå››");
+				break;
+			case DateTimeConstants.FRIDAY:
+				System.out.println("æ˜ŸæœŸäº”");
+				break;
+			case DateTimeConstants.SATURDAY:
+				System.out.println("æ˜ŸæœŸå…­");
+				break;
 		}
 	}
 
-	
-	// È¡ÌØÊâÈÕÆÚ
+
+	// å–ç‰¹æ®Šæ—¥æœŸ
 	public void test7() {
 		DateTime dt = new DateTime();
 
-		// ÔÂÄ©ÈÕÆÚ
+		// æœˆæœ«æ—¥æœŸ
 		DateTime lastday = dt.dayOfMonth().withMaximumValue();
 
-		// 90ÌìºóÄÇÖÜµÄÖÜÒ»
+		// 90å¤©åé‚£å‘¨çš„å‘¨ä¸€
 		DateTime firstday = dt.plusDays(90).dayOfWeek().withMinimumValue();
 	}
 
-	
-	// Ê±Çø
+
+	// æ—¶åŒº
 	public void test8() {
-		// Ä¬ÈÏÉèÖÃÎªÈÕ±¾Ê±¼ä
+		// é»˜è®¤è®¾ç½®ä¸ºæ—¥æœ¬æ—¶é—´
 		DateTimeZone.setDefault(DateTimeZone.forID("Asia/Tokyo"));
 		DateTime dt1 = new DateTime();
 
-		// Â×¶ØÊ±¼ä
+		// ä¼¦æ•¦æ—¶é—´
 		DateTime dt2 = new DateTime(DateTimeZone.forID("Europe/London"));
 	}
 
-	
-	// ¼ÆËãÇø¼ä
+
+	// è®¡ç®—åŒºé—´
 	public void test9() {
 		DateTime begin = new DateTime("2012-02-01");
 		DateTime end = new DateTime("2012-05-01");
 
-		// ¼ÆËãÇø¼äºÁÃëÊı
+		// è®¡ç®—åŒºé—´æ¯«ç§’æ•°
 		Duration d = new Duration(begin, end);
 		long time = d.getMillis();
 
-		// ¼ÆËãÇø¼äÌìÊı
+		// è®¡ç®—åŒºé—´å¤©æ•°
 		Period p = new Period(begin, end, PeriodType.days());
 		int days = p.getDays();
-		
+
 		System.out.println(days);
 
-		// ¼ÆËãÌØ¶¨ÈÕÆÚÊÇ·ñÔÚ¸ÃÇø¼äÄÚ
+		// è®¡ç®—ç‰¹å®šæ—¥æœŸæ˜¯å¦åœ¨è¯¥åŒºé—´å†…
 		Interval i = new Interval(begin, end);
 		boolean contained = i.contains(new DateTime("2012-03-01"));
 	}
 
-	
-	// ¼ÆËãÇø¼ä
+
+	// è®¡ç®—åŒºé—´
 	public void test10() {
 		DateTime d1 = new DateTime("2012-02-01");
 		DateTime d2 = new DateTime("2012-05-01");
 
-		// ºÍÏµÍ³Ê±¼ä±È
+		// å’Œç³»ç»Ÿæ—¶é—´æ¯”
 		boolean b1 = d1.isAfterNow();
 		boolean b2 = d1.isBeforeNow();
 		boolean b3 = d1.isEqualNow();
 
-		// ºÍÆäËûÈÕÆÚ±È
+		// å’Œå…¶ä»–æ—¥æœŸæ¯”
 		boolean f1 = d1.isAfter(d2);
 		boolean f2 = d1.isBefore(d2);
 		boolean f3 = d1.isEqual(d2);
 	}
 
-	
-	// ¸ñÊ½»¯Êä³ö
+
+	// æ ¼å¼åŒ–è¾“å‡º
 	public void test11() {
 		DateTime dateTime = new DateTime();
 		String s1 = dateTime.toString("yyyy/MM/dd hh:mm:ss.SSSa");
@@ -231,14 +219,15 @@ public class JodaTest {
 		String s5 = dateTime.toString("yyyy/MM/dd HH:mm Z");
 		String s6 = dateTime.toString("yyyy/MM/dd");
 		String s7 = dateTime.toString("hh:mm:ss");
-		String s8 = dateTime.toString("yyyyÄêMMÔÂddÈÕ");
-		
+		String s8 = dateTime.toString("yyyyå¹´MMæœˆddæ—¥");
+
 		System.out.println(s2);
 		System.out.println(s5);
 		System.out.println(s6);
 		System.out.println(s7);
 		System.out.println(s8);
-		
+		System.out.println("æµ‹è¯•è½¦æµ‹è¯•è½¦");
+
 	}
 
 }
