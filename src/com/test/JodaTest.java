@@ -227,7 +227,7 @@ public class JodaTest {
 		System.out.println(s7);
 		System.out.println(s8);
 		System.out.println("测试车测试车");
-        System.out.println("three:测试车测试车");
+        System.out.println("four:测试车测试车");
 
 	}
 
